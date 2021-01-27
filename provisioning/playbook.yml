@@ -1,0 +1,100 @@
+---
+# Ansible playbook for an AWX server.
+
+- hosts: awx
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Add an apt key for Ansible repository
+      ansible.builtin.apt_key:
+        keyserver: keyserver.ubuntu.com
+        id: 93C4A3FD7BB9C367
+
+    - name: Add Ansible repository
+      ansible.builtin.apt_repository:
+        repo: deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main
+        state: present
+        update_cache: yes
+
+    - name: Install Ansible
+      package:
+        name: ansible
+        state: present
+
+    - name: Install required packages for Docker
+      package:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - gnupg-agent
+          - software-properties-common
+        state: present
+
+    - name: Add Docker's official apt key.
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+        state: present
+      register: add_key
+      ignore_errors: true
+
+    #- name: Add Docker apt key if failed
+    #  shell: "curl -sSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -"
+    #  args:
+    #    warn: no
+    #  when: add_key|failed
+
+    - name: Add Docker stable repository.
+      ansible.builtin.apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/debian buster stable"
+        state: present
+        update_cache: yes
+
+    - name: Install Docker
+      package:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose
+        state: present
+
+    - name: Install required packaged for Ansible AWX
+      package:
+        name:
+          - nodejs
+          - npm
+          - git
+        state: present
+
+    - name: Install NPM as global
+      community.general.npm:
+        name: npm
+        global: yes
+        state: present
+
+    - name: Install Python for Docker
+      package:
+        name:
+          - python3-pip
+          - pwgen
+          - python3-docker
+        state: present
+
+    - name: Install Python module for Docker compose
+      pip:
+        name: docker-compose
+        state: present
+
+    - name: Clone AWX repository
+      git:
+          repo: 'https://github.com/ansible/awx.git'
+          dest: /tmp/awx
+          version: "17.0.1"
+
+    - name: Run the AWX installation playbook.
+      command: "ansible-playbook -i inventory install.yml -e postgres_data_dir=/var/lib/pgdocker"
+      args:
+        chdir: "/tmp/awx/installer"
