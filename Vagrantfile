@@ -1,6 +1,4 @@
-# -*- mode: ruby -*-
-# vi: set ft=ruby :
-
+# ansible-awx-demo
 VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
@@ -14,7 +12,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     v.customize ["modifyvm", :id, "--ioapic", "on"]
   end
 
-  # AWX VM.
+  # AWX VM
   config.vm.define "awx" do |awx|
     awx.vm.hostname = "awx.local"
     awx.vm.network :private_network, ip: "192.168.6.65"

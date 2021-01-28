@@ -83,7 +83,7 @@
           - python3-docker
         state: present
 
-    - name: Install Python module for Docker compose
+    - name: Install Python modules for Docker Compose
       pip:
         name: docker-compose
         state: present
@@ -93,6 +93,14 @@
           repo: 'https://github.com/ansible/awx.git'
           dest: /tmp/awx
           version: "17.0.1"
+
+    - name: Copy customized inventory file for awx
+      ansible.builtin.copy:
+        src: inventory_awx.txt
+        dest: /tmp/awx/installer/inventory
+        owner: root
+        group: root
+        mode: '0754'
 
     - name: Run the AWX installation playbook.
       command: "ansible-playbook -i inventory install.yml -e postgres_data_dir=/var/lib/pgdocker"
