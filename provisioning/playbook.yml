@@ -112,3 +112,18 @@
       pip:
           name: awxkit
           state: present
+
+    - name: Add minions to /etc/host
+      blockinfile:
+        path: /etc/hosts
+        insertafter: EOF
+        marker: "# {mark} minions to manage"
+        block: |
+          192.168.6.66 minion1.local minion1
+          192.168.6.67 minion2.local minion2
+
+    - name: Add minions to ansible
+      add_hosts:
+        name:
+          - minion1
+          - minion2
