@@ -122,8 +122,12 @@
           192.168.6.66 minion1.local minion1
           192.168.6.67 minion2.local minion2
 
-    - name: Add minions to ansible
-      add_hosts:
-        name:
-          - minion1
-          - minion2
+    - name: Add minion1 to Ansible
+      add_host:
+        name: minion1
+        groups: minions
+
+    - name: Add minion2 to Ansible
+      add_host:
+        name: minion2
+        groups: minions
