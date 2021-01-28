@@ -1,6 +1,6 @@
 # Ansible AWX demo
 
-This example installs Ansible's [AWX Project](https://github.com/ansible/awx) (the upstream open source project behind [Ansible Tower](https://www.ansible.com/tower)) on an [Debian](http://www.debian.org) virtualmachine running in [VirtualBox](https://www.virtualbox.org/wiki/Downloads), so you can test and run AWX... to test and run more Ansible playbooks!
+This example installs Ansible's [AWX Project](https://github.com/ansible/awx) (the upstream open source project behind [Ansible Tower (https://www.ansible.com/tower)) on [Debian](http://www.debian.org) virtualmachine running in [VirtualBox](https://www.virtualbox.org/wiki/Downloads), so you can test and run AWX... to test and run more Ansible playbooks!
 
 ## Getting Started
 
@@ -9,10 +9,11 @@ This README file is inside a folder that contains a `Vagrantfile` (hereafter thi
 To use the vagrant file, you will need to have done the following:
 
   1. Download and Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
-  2. Download and Install [Vagrant](https://www.vagrantup.com/downloads.html)
-  3. Install [Ansible](https://www.ansible.com/) ([guide for installing Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html))
-  4. Install passlib for python. Needed to generate passwords in MacOS. Use: `pip install passlib`
-  5. Open a shell prompt (Terminal app on a Mac) and cd into the folder containing the `Vagrantfile`
+  1. Download and Install [Vagrant](https://www.vagrantup.com/downloads.html)
+  1. Install [Ansible](https://www.ansible.com/). [Guide for installing Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html))
+  1. Install [community.crypto](https://docs.ansible.com/ansible/latest/collections/community/crypto/openssh_keypair_module.html) module. Needed to generate SSH keys with Ansible. Command: `ansible-galaxy collection install community.crypto`
+  1. Install [passlib](https://foss.heptapod.net/python-libs/passlib/-/wikis/home) for python. Needed to generate passwords in MacOS. Command: `pip install passlib`
+  1. Open a shell prompt (Terminal app on a Mac) and cd into the folder containing the `Vagrantfile`
 
 Once all of that is done, you can simply type in `vagrant up`, and Vagrant will create both new VMs and configure them.
 
