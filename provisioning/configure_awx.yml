@@ -19,4 +19,5 @@
       tower_inventory:
           name: "Minions"
           description: "Demo servers"
+          organization: "WeAreMinions"
           state: present
