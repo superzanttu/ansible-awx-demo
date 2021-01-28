@@ -16,6 +16,14 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--ioapic", "on"]
     end
+
+    m.vm.provision :ansible do |ansible|
+      ansible.compatibility_mode = "auto"
+      ansible.playbook = "provisioning/build_minion.yml"
+      ansible.inventory_path = "provisioning/inventory_minions"
+      ansible.become = true
+    end
+
   end
 
   # minion2 VM
@@ -33,6 +41,14 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--ioapic", "on"]
     end
+
+    m.vm.provision :ansible do |ansible|
+      ansible.compatibility_mode = "auto"
+      ansible.playbook = "provisioning/build_minion.yml"
+      ansible.inventory_path = "provisioning/inventory_minions"
+      ansible.become = true
+    end
+
   end
 
 
@@ -54,8 +70,8 @@ Vagrant.configure("2") do |config|
 
     awx.vm.provision :ansible do |ansible|
       ansible.compatibility_mode = "auto"
-      ansible.playbook = "provisioning/playbook.yml"
-      ansible.inventory_path = "provisioning/inventory"
+      ansible.playbook = "provisioning/build_awx.yml"
+      ansible.inventory_path = "provisioning/inventory_awx"
       ansible.become = true
     end
   end

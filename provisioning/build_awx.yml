@@ -1,11 +1,17 @@
 ---
 # Ansible playbook for an AWX server.
 
-- hosts: awx
+- name: Setup AWX VM
+  hosts: awx
   gather_facts: yes
   become: yes
 
   tasks:
+    - name: Is this Debian?
+      fail: msg="Debian only playbook"
+      when:
+        - ansible_facts['distribution'] != "Debian"
+        
     - name: Add an APT key for Ansible repository
       ansible.builtin.apt_key:
         keyserver: keyserver.ubuntu.com

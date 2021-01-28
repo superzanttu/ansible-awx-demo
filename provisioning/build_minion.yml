@@ -1,0 +1,44 @@
+---
+# Ansible playbook for an AWX server.
+
+- name: Setup Minion VM
+  hosts: all
+  gather_facts: yes
+  become: yes
+
+
+  tasks:
+    - name: Is this Debian?
+      fail: msg="Debian only playbook"
+      when:
+        - ansible_facts['distribution'] != "Debian"
+
+    - name: Add minion1 and awx to /etc/host
+      blockinfile:
+        path: /etc/hosts
+        insertafter: EOF
+        marker: "# {mark} other minions"
+        block: |
+          192.168.6.66 minion1.local minion1
+          192.168.6.65 awx.local awx
+      when:
+        - ansible_facts['nodename'] == "minion2"
+
+
+    - name: Add minion2 and axw to /etc/host
+      blockinfile:
+        path: /etc/hosts
+        insertafter: EOF
+        marker: "# {mark} other minions"
+        block: |
+          192.168.6.65 awx.local awx
+          192.168.6.67 minion2.local minion2
+      when:
+        - ansible_facts['nodename'] == "minion1"
+
+    - name: Add user awx for Ansible awx
+      ansible.builtin.user:
+        name: awx
+        password: "{{ 'awx_password' | password_hash('sha512') }}"
+        groups:
+          - sudo
