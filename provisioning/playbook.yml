@@ -6,7 +6,7 @@
   become: yes
 
   tasks:
-    - name: Add an apt key for Ansible repository
+    - name: Add an APT key for Ansible repository
       ansible.builtin.apt_key:
         keyserver: keyserver.ubuntu.com
         id: 93C4A3FD7BB9C367
@@ -94,7 +94,7 @@
           dest: /tmp/awx
           version: "17.0.1"
 
-    - name: Copy customized inventory file for awx
+    - name: Copy customized inventory file for AWX
       ansible.builtin.copy:
         src: inventory_awx.txt
         dest: /tmp/awx/installer/inventory
