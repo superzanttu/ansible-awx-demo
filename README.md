@@ -11,7 +11,7 @@ To use the vagrant file, you will need to have done the following:
   1. Download and Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
   1. Download and Install [Vagrant](https://www.vagrantup.com/downloads.html)
   1. Install [Ansible](https://www.ansible.com/). [Guide for installing Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html))
-  1. Install [community.crypto](https://docs.ansible.com/ansible/latest/collections/community/crypto/openssh_keypair_module.html) module. Needed to generate SSH keys with Ansible. Command: `ansible-galaxy collection install community.crypto`
+  1. Install [AWX Ansible Collection](https://github.com/ansible/awx/blob/devel/awx_collection/README.md) module. Needed to manage AWS with Ansible. Command: `ansible-galaxy collection install awx.awx`
   1. Install [passlib](https://foss.heptapod.net/python-libs/passlib/-/wikis/home) for Python. Needed to generate passwords in MacOS. Command: `pip install passlib`
   1. Open a shell prompt (Terminal app on a Mac) and cd into the folder containing the `Vagrantfile`
 
