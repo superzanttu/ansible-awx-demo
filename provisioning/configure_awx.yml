@@ -1,0 +1,22 @@
+---
+# Ansible playbook for an AWX server.
+# This playbook configures AWS server and adds minions.
+# Requires aws.aws from Ansible galaxy
+# ansible-galaxy collection install awx.awx
+
+- name: Configure AWX
+  hosts: awx
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Is this Debian?
+      fail: msg="Debian only playbook"
+      when:
+        - ansible_facts['distribution'] != "Debian"
+
+    - name: Add Minions inventory
+      tower_inventory:
+          name: "Minions"
+          description: "Demo servers"
+          state: present

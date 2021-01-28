@@ -1,7 +1,9 @@
 ---
 # Ansible playbook for an AWX server.
+# This playbooks install all needed components needed to run AWX.
+# configure_awx.yml is used to configure AWS and add minions.
 
-- name: Setup AWX VM
+- name: Build AWX VM
   hosts: awx
   gather_facts: yes
   become: yes
@@ -11,7 +13,7 @@
       fail: msg="Debian only playbook"
       when:
         - ansible_facts['distribution'] != "Debian"
-        
+
     - name: Add an APT key for Ansible repository
       ansible.builtin.apt_key:
         keyserver: keyserver.ubuntu.com
@@ -127,13 +129,3 @@
         block: |
           192.168.6.66 minion1.local minion1
           192.168.6.67 minion2.local minion2
-
-    - name: Add minion1 to Ansible
-      add_host:
-        name: minion1
-        groups: minions
-
-    - name: Add minion2 to Ansible
-      add_host:
-        name: minion2
-        groups: minions

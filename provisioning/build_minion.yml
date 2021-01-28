@@ -35,10 +35,3 @@
           192.168.6.67 minion2.local minion2
       when:
         - ansible_facts['nodename'] == "minion1"
-
-    - name: Add user awx for Ansible awx
-      ansible.builtin.user:
-        name: awx
-        password: "{{ 'awx_password' | password_hash('sha512') }}"
-        groups:
-          - sudo

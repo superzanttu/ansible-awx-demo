@@ -1,6 +1,37 @@
 # ansible-awx-demo
 Vagrant.configure("2") do |config|
 
+  # AWX VM
+  config.vm.define "awx" do |awx|
+    awx.vm.define "awx"
+    awx.vm.box = "debian/buster64"
+    awx.vm.hostname = "awx.local"
+    awx.vm.network :private_network, ip: "192.168.6.65"
+    awx.ssh.insert_key = false
+
+    awx.vm.provider :virtualbox do |v|
+      v.name = "awx"
+      v.memory = 4096
+      v.cpus = 2
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+    end
+
+    awx.vm.provision :ansible do |ansible|
+      ansible.compatibility_mode = "auto"
+      ansible.playbook = "provisioning/build_awx_vm.yml"
+      ansible.inventory_path = "provisioning/inventory_awx"
+      ansible.become = true
+    end
+
+    awx.vm.provision :ansible do |ansible|
+      ansible.compatibility_mode = "auto"
+      ansible.playbook = "provisioning/configure_awx.yml"
+      ansible.inventory_path = "provisioning/inventory_awx"
+      ansible.become = true
+    end
+  end
+
   # minion1 VM
   config.vm.define "minion1" do |m|
     m.vm.define "minion1"
@@ -52,28 +83,6 @@ Vagrant.configure("2") do |config|
   end
 
 
-  # AWX VM
-  config.vm.define "awx" do |awx|
-    awx.vm.define "awx"
-    awx.vm.box = "debian/buster64"
-    awx.vm.hostname = "awx.local"
-    awx.vm.network :private_network, ip: "192.168.6.65"
-    awx.ssh.insert_key = false
 
-    awx.vm.provider :virtualbox do |v|
-      v.name = "awx"
-      v.memory = 4096
-      v.cpus = 2
-      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--ioapic", "on"]
-    end
-
-    awx.vm.provision :ansible do |ansible|
-      ansible.compatibility_mode = "auto"
-      ansible.playbook = "provisioning/build_awx.yml"
-      ansible.inventory_path = "provisioning/inventory_awx"
-      ansible.become = true
-    end
-  end
 
 end
