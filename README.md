@@ -11,10 +11,7 @@ To use the vagrant file, you will need to have done the following:
   1. Download and Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
   2. Download and Install [Vagrant](https://www.vagrantup.com/downloads.html)
   3. Install [Ansible](https://www.ansible.com/) ([guide for installing Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html))
-  4. Install passlib for python. Needed to generate passwords in MacOS.
-  
-    pip install passlib
-
+  4. Install passlib for python. Needed to generate passwords in MacOS. Use: `pip install passlib`
   5. Open a shell prompt (Terminal app on a Mac) and cd into the folder containing the `Vagrantfile`
 
 Once all of that is done, you can simply type in `vagrant up`, and Vagrant will create both new VMs and configure them.
