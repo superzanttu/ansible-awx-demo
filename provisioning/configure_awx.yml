@@ -1,6 +1,6 @@
 ---
 # Ansible playbook for an AWX server.
-# This playbook configures AWS server and adds minions.
+# This playbook configures AWX server and adds minions.
 # Requires aws.aws from Ansible galaxy
 # ansible-galaxy collection install awx.awx
 
@@ -8,6 +8,11 @@
   hosts: awx
   gather_facts: yes
   become: yes
+  #environment:
+  #  TOWER_HOST: awx.local
+  #  TOWER_USERNAME: admin
+  #  TOWER_PASSWORD: password
+  #  TOWER_VERIFY_SSL: false
 
   tasks:
     - name: Is this Debian?
@@ -17,13 +22,18 @@
 
     - name: We are minions organization
       tower_organization:
+        tower_host: awx.local
+        tower_username: admin
+        tower_password: password
+        tower_oauthtoken: SpJ2hJdvl5JwJGS1efEuSY6pDHNFXP
+        validate_certs: no
         name: "WeAreMinions"
-        description: "Yellow! Banana!"
+        description: "Power of Team Yellow"
         state: present
 
-    - name: Add Minions inventory
-      tower_inventory:
-        name: "Minions"
-        description: "Demo servers"
-        organization: "WeAreMinions"
-        state: present
+    #- name: Add Minions inventory
+    #  tower_inventory:
+    #    name: "Minions"
+    #    description: "Demo servers"
+    #    organization: "WeAreMinions"
+    #    state: present
