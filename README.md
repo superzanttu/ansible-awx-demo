@@ -12,10 +12,9 @@ To use the vagrant file, you will need to have done the following:
   1. Download and Install [Vagrant](https://www.vagrantup.com/downloads.html)
   1. Install [Ansible](https://www.ansible.com/). [Guide for installing Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html))
   1. Install [AWX Ansible Collection](https://github.com/ansible/awx/blob/devel/awx_collection/README.md) module. Needed to manage AWS with Ansible. Command: `ansible-galaxy collection install awx.awx`
-  1. Install [passlib](https://foss.heptapod.net/python-libs/passlib/-/wikis/home) for Python. Needed to generate passwords in MacOS. Command: `pip install passlib`
   1. Open a shell prompt (Terminal app on a Mac) and cd into the folder containing the `Vagrantfile`
-
-Once all of that is done, you can simply type in `vagrant up`, and Vagrant will create both new VMs and configure them.
+  1. Type in `vagrant up`, and Vagrant will create both new VMs and configure them.
+  1. Run `local_config.sh` to configure host. This adds VMs to `/etc/hosts` etc.
 
 Once the VM is up and running (after `vagrant up` is complete and you're back at the command prompt), you can log into it via SSH if you'd like by typing in `vagrant ssh`. Otherwise, the next steps are below.
 
