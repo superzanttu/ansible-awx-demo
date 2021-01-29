@@ -24,12 +24,12 @@ Vagrant.configure("2") do |config|
       ansible.become = true
     end
 
-    awx.vm.provision :ansible do |ansible|
-      ansible.compatibility_mode = "auto"
-      ansible.playbook = "provisioning/configure_awx.yml"
-      ansible.inventory_path = "provisioning/inventory_awx"
-      ansible.become = true
-    end
+    #awx.vm.provision :ansible do |ansible|
+    #  ansible.compatibility_mode = "auto"
+    #  ansible.playbook = "provisioning/configure_awx.yml"
+    #  ansible.inventory_path = "provisioning/inventory_awx"
+    #  ansible.become = true
+    #end
   end
 
   # minion1 VM

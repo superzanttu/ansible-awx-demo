@@ -1,0 +1,25 @@
+---
+# Ansible playbook for an AWX server.
+
+- name: Setup tool server
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  become: yes
+
+  tasks:
+
+    - name: Is this MacOSX(Darwin)?
+      fail: msg="Darwin only playbook. {{ ansible_facts['distribution'] }} not supported."
+      when:
+        - ansible_facts['distribution'] != "MacOSX"
+
+    - name: Add AWX demo VMs to /etc/hosts
+      blockinfile:
+        path: /etc/hosts
+        insertafter: EOF
+        marker: "# {mark} AWX demo VMs"
+        block: |
+          192.168.6.65 awx.local awx
+          192.168.6.66 minion1.local minion1
+          192.168.6.67 minion2.local minion2

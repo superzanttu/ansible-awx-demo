@@ -15,9 +15,15 @@
       when:
         - ansible_facts['distribution'] != "Debian"
 
+    - name: We are minions organization
+      tower_organization:
+        name: "WeAreMinions"
+        description: "Yellow! Banana!"
+        state: present
+
     - name: Add Minions inventory
       tower_inventory:
-          name: "Minions"
-          description: "Demo servers"
-          organization: "WeAreMinions"
-          state: present
+        name: "Minions"
+        description: "Demo servers"
+        organization: "WeAreMinions"
+        state: present

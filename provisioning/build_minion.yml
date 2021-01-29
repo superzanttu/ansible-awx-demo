@@ -1,11 +1,10 @@
 ---
-# Ansible playbook for an AWX server.
+# Ansible playbook for an AWX minions
 
 - name: Setup Minion VM
   hosts: all
   gather_facts: yes
   become: yes
-
 
   tasks:
     - name: Is this Debian?
@@ -13,7 +12,7 @@
       when:
         - ansible_facts['distribution'] != "Debian"
 
-    - name: Add minion1 and awx to /etc/host
+    - name: Add minion1 and awx to /etc/hosts
       blockinfile:
         path: /etc/hosts
         insertafter: EOF
@@ -24,8 +23,7 @@
       when:
         - ansible_facts['nodename'] == "minion2"
 
-
-    - name: Add minion2 and axw to /etc/host
+    - name: Add minion2 and axw to /etc/hosts
       blockinfile:
         path: /etc/hosts
         insertafter: EOF
