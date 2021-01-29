@@ -125,7 +125,7 @@
         common_name: awx.local
 
     - name: Sign the CSR file as a CA to turn it into a certificate
-      community.crypto.openssl_certificate:
+      community.crypto.x509_certificate:
         path: /tmp/awx.local.crt
         privatekey_path: /tmp/awx.local.pem
         privatekey_passphrase: "password"
