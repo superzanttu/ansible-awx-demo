@@ -113,23 +113,23 @@
 
     - name: Generate the private key file to sign the CSR
       community.crypto.openssl_privatekey:
-        path: /tmp/awx.local.pem
+        path: /root/awx.local.pem
         passphrase: "password"
         cipher: auto
 
     - name: Generate the CSR file signed with the private key
       community.crypto.openssl_csr:
-        path: /tmp/awx.local.csr
-        privatekey_path: /tmp/awx.local.pem
+        path: /root/awx.local.csr
+        privatekey_path: /root/awx.local.pem
         privatekey_passphrase: "password"
         common_name: awx.local
 
     - name: Sign the CSR file as a CA to turn it into a certificate
       community.crypto.x509_certificate:
-        path: /tmp/awx.local.crt
-        privatekey_path: /tmp/awx.local.pem
+        path: /root/awx.local.crt
+        privatekey_path: /root/awx.local.pem
         privatekey_passphrase: "password"
-        csr_path: /tmp/awx.local.csr
+        csr_path: /root/awx.local.csr
         provider: selfsigned
 
     - name: Run the AWX installation playbook.
