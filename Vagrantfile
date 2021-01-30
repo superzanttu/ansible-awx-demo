@@ -39,6 +39,7 @@ Vagrant.configure("2") do |config|
     awx.vm.box = VM_BOX
     awx.vm.hostname = AWX_VM_HOSTNAME
     awx.vm.network = VM_NETWORK_TYPE
+    awx.vm.ip = AWX_VM_IP
     awx.ssh.insert_key = false
 
     awx.vm.provider :virtualbox do |v|
