@@ -73,7 +73,7 @@ Vagrant.configure("2") do |config|
     m.vm.provider :virtualbox do |v|
       v.name = MINION1_VM_NAME
       v.memory = MINION1_VM_MEMORY
-      v.cpus = MINION1_VM_NAME
+      v.cpus = MINION1_VM_CPUS
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--ioapic", "on"]
     end
