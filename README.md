@@ -1,6 +1,6 @@
 # Ansible AWX demo
 
-This example installs Ansible's [AWX Project](https://github.com/ansible/awx) (the upstream open source project behind [Ansible Tower (https://www.ansible.com/tower)) on [Debian](http://www.debian.org) virtualmachine running in [VirtualBox](https://www.virtualbox.org/wiki/Downloads), so you can test and run AWX... to test and run more Ansible playbooks!
+This example installs Ansible's [AWX Project](https://github.com/ansible/awx) (the upstream open source project behind [Ansible Tower (https://www.ansible.com/tower) on [Debian](http://www.debian.org) virtualmachine running in [VirtualBox](https://www.virtualbox.org/wiki/Downloads), so you can test and run AWX... to test and run more Ansible playbooks!
 
 ## Getting Started
 
@@ -10,7 +10,7 @@ To use the vagrant file, you will need to have done the following:
 
   1. Download and Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
   1. Download and Install [Vagrant](https://www.vagrantup.com/downloads.html)
-  1. Install [Ansible](https://www.ansible.com/). [Guide for installing Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html))
+  1. Install [Ansible](https://www.ansible.com/). [Guide for installing Ansible](http://docs.ansible.com/ansible/latest/intro_installation.html)
   1. Install [AWX Ansible Collection](https://github.com/ansible/awx/blob/devel/awx_collection/README.md) module. Needed to manage AWS with Ansible. Command: `ansible-galaxy collection install awx.awx`
   1. Install [Community.Crypto Collection](https://docs.ansible.com/ansible/latest/collections/community/crypto/) module. Needed to generate SSL certificate for AWX. Command: `ansible-galaxy collection install community.crypto`
   1. Open a shell prompt (Terminal app on a Mac) and cd into the folder containing the `Vagrantfile`
