@@ -79,33 +79,30 @@ Vagrant.configure("2") do |config|
       ansible.inventory_path = "provisioning/inventory_minions"
       ansible.become = true
     end
-
-    # tool VM
-    config.vm.define "tool" do |m|
-      m.vm.define "tool"
-      m.vm.box = "debian/buster64"
-      m.vm.hostname = "tool.local"
-      m.vm.network :private_network, ip: "192.168.6.68"
-      m.ssh.insert_key = false
-
-      m.vm.provider :virtualbox do |v|
-        v.name = "tool"
-        v.memory = 2048
-        v.cpus = 2
-        v.customize ["modifyvm", :id, "--vram", "12"]
-        v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-        v.customize ["modifyvm", :id, "--ioapic", "on"]
-      end
-
-      m.vm.provision :ansible do |ansible|
-        ansible.compatibility_mode = "auto"
-        ansible.playbook = "provisioning/build_tool.yml"
-        ansible.inventory_path = "provisioning/inventory_tool"
-        ansible.become = true
-      end
   end
 
+  # tool VM
+  config.vm.define "tool" do |m|
+    m.vm.define "tool"
+    m.vm.box = "debian/buster64"
+    m.vm.hostname = "tool.local"
+    m.vm.network :private_network, ip: "192.168.6.68"
+    m.ssh.insert_key = false
 
+    m.vm.provider :virtualbox do |v|
+      v.name = "tool"
+      v.memory = 2048
+      v.cpus = 2
+      v.customize ["modifyvm", :id, "--vram", "12"]
+      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+      v.customize ["modifyvm", :id, "--ioapic", "on"]
+    end
 
-
+    m.vm.provision :ansible do |ansible|
+      ansible.compatibility_mode = "auto"
+      ansible.playbook = "provisioning/build_tool.yml"
+      ansible.inventory_path = "provisioning/inventory_tool"
+      ansible.become = true
+    end
+  end
 end
