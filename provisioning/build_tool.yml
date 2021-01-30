@@ -28,15 +28,15 @@
         dest: /etc/systemd/system/default.target
         state: link
 
-    - name: Restart login manager service
-      ansible.builtin.service:
-        name: "{{ xfce4_login_manager_service }}"
-        state: restarted
+    #- name: Restart login manager service
+    #  ansible.builtin.service:
+    #    name: "{{ xfce4_login_manager_service }}"
+    #    state: restarted
 
-    - name: Restart VirtualBox Guest Addtions service
-      ansible.builtin.service:
-        name: vboxadd-service
-        state: restarted
+    #- name: Restart VirtualBox Guest Addtions service
+    #  ansible.builtin.service:
+    #    name: vboxadd-service
+    #    state: restarted
 
     - name: Setup autologin for user vagrant
       blockinfile:
