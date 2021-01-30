@@ -37,3 +37,16 @@
       ansible.builtin.service:
         name: vboxadd-service
         state: restarted
+
+    - name: Setup autologin for user vagrant
+      blockinfile:
+        path: /etc/lightdm.conf
+        insertafter: EOF
+        marker: "# {mark} vagrant autologin"
+        block: |
+          [SeatDefaults]
+          autologin-user=Vagrant
+          autologin-user-timeout=0
+
+    - name: Final reboot
+      reboot:

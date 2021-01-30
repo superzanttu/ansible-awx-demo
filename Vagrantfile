@@ -1,6 +1,6 @@
 # ansible-awx-demo
 
-ANSIBLE_VERBOSITY_LEVEL = "v"
+ANSIBLE_VERBOSITY_LEVEL = ""
 
 VM_BOX = "debian/buster64"
 VM_NETWORK_TYPE = "private_network"
