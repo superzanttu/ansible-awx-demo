@@ -1,0 +1,1 @@
+tool ansible_ssh_host=192.168.6.68 ansible_ssh_port=22

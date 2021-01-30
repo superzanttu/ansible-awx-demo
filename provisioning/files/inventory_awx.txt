@@ -1,3 +1,5 @@
+# This is custom inventory file for AWX installation playbook
+
 localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env python3"
 
 [all:vars]
