@@ -6,13 +6,29 @@
   gather_facts: yes
   become: yes
 
+  vars:
+    xfce4_packages:
+      - task-xfce-desktop
+    xfce4_login_manager_service: lightdm
+
   tasks:
     - name: Is this Debian?
       fail: msg="Debian only playbook"
       when:
         - ansible_facts['distribution'] != "Debian"
 
-      - name: Install Xfce GUI
-        package:
-          name: xfce-desktop
-          state: present
+    - name: Install Xfce4 packages
+      package:
+        name: "{{ xfce4_packages }}"
+        state: present
+
+    - name: Change default target to graphical.target
+      file:
+        src: /usr/lib/systemd/system/graphical.target
+        dest: /etc/systemd/system/default.target
+        state: link
+
+    - name: Restart login manager service
+      ansible.builtin.service:
+        name: "{{ xfce4_login_manager_service }}"
+        state: restarted
