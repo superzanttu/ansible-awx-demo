@@ -1,2 +1,2 @@
-vagrant destroy --parallel
-vagrant up
+time vagrant destroy --parallel
+time vagrant up
