@@ -1,50 +1,50 @@
 # ansible-awx-demo
 
-$ANSIBLE_VERBOSITY_LEVEL = "vvvv"
+ZZZANSIBLE_VERBOSITY_LEVEL = "vvvv"
 
 
-$VM_BOX = "debian/buster64"
-$VM_NETWORK_TYPE = "private_network"
+ZZZVM_BOX = "debian/buster64"
+ZZZVM_NETWORK_TYPE = "private_network"
 
-$AWX_VM_IP = "192.168.6.65"
-$MINION1_VM_IP = "192.168.6.66"
-$MINION2_VM_IP = "192.168.6.67"
-$TOOL_VM_IP = "192.168.6.68"
+ZZZAWX_VM_IP = "192.168.6.65"
+ZZZMINION1_VM_IP = "192.168.6.66"
+ZZZMINION2_VM_IP = "192.168.6.67"
+ZZZTOOL_VM_IP = "192.168.6.68"
 
-$AWX_VM_NAME = "awx"
-$MINION1_VM_NAME = "minion1"
-$MINION2_VM_NAME = "minion2"
-$TOOL_VM_NAME = "tool"
+ZZZAWX_VM_NAME = "awx"
+ZZZMINION1_VM_NAME = "minion1"
+ZZZMINION2_VM_NAME = "minion2"
+ZZZTOOL_VM_NAME = "tool"
 
-$AWX_VM_HOSTNAME = "awx.local"
-$MINION1_VM_HOSTNAME = "minion1.local"
-$MINION2_VM_HOSTNAME = "minion2.local"
-$TOOL_VM_HOSTNAME = "tool.local"
+ZZZAWX_VM_HOSTNAME = "awx.local"
+ZZZMINION1_VM_HOSTNAME = "minion1.local"
+ZZZMINION2_VM_HOSTNAME = "minion2.local"
+ZZZTOOL_VM_HOSTNAME = "tool.local"
 
-$AWX_VM_MEMORY = "4094"
-$MINION1_VM_MEMORY = "512"
-$MINION2_VM_MEMORY = "512"
-$TOOL_VM_MEMORY = "2048"
+ZZZAWX_VM_MEMORY = "4094"
+ZZZMINION1_VM_MEMORY = "512"
+ZZZMINION2_VM_MEMORY = "512"
+ZZZTOOL_VM_MEMORY = "2048"
 
-$AWX_VM_CPUS = "2"
-$MINION1_VM_CPUS = "1"
-$MINION2_VM_CPUS = "1"
-$TOOL_VM_CPUS = "2"
+ZZZAWX_VM_CPUS = "2"
+ZZZMINION1_VM_CPUS = "1"
+ZZZMINION2_VM_CPUS = "1"
+ZZZTOOL_VM_CPUS = "2"
 
 Vagrant.configure("2") do |config|
 
   # AWX VM
-  config.vm.define $AWX_VM_NAME do |awx|
-    awx.vm.define $AWX_VM_NAME
-    awx.vm.box = $VM_BOX
-    awx.vm.hostname = $AWX_VM_HOSTNAME
-    awx.vm.network $VM_NETWORK_TYPE, ip: $AWX_VM_IP
+  config.vm.define ZZZAWX_VM_NAME do |awx|
+    awx.vm.define ZZZAWX_VM_NAME
+    awx.vm.box = ZZZVM_BOX
+    awx.vm.hostname = ZZZAWX_VM_HOSTNAME
+    awx.vm.network ZZZVM_NETWORK_TYPE, ip: ZZZAWX_VM_IP
     awx.ssh.insert_key = false
 
     awx.vm.provider :virtualbox do |v|
-      v.name = $AWX_VM_NAME
-      v.memory = $AWX_VM_MEMORY
-      v.cpus = $AWX_VM_CPUS
+      v.name = ZZZAWX_VM_NAME
+      v.memory = ZZZAWX_VM_MEMORY
+      v.cpus = ZZZAWX_VM_CPUS
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--ioapic", "on"]
     end
@@ -65,23 +65,23 @@ Vagrant.configure("2") do |config|
   end
 
   # minion1 VM
-  config.vm.define $MINION1_VM_NAME do |m|
-    m.vm.define $MINION1_VM_NAME
-    m.vm.box = $VM_BOX
-    m.vm.hostname = $MINION1_VM_HOSTNAME
-    m.vm.network $VM_NETWORK_TYPE, ip: $MINION1_VM_IP
+  config.vm.define ZZZMINION1_VM_NAME do |m|
+    m.vm.define ZZZMINION1_VM_NAME
+    m.vm.box = ZZZVM_BOX
+    m.vm.hostname = ZZZMINION1_VM_HOSTNAME
+    m.vm.network ZZZVM_NETWORK_TYPE, ip: ZZZMINION1_VM_IP
     m.ssh.insert_key = false
 
     m.vm.provider :virtualbox do |v|
-      v.name = $MINION1_VM_NAME
-      v.memory = $MINION1_VM_MEMORY
-      v.cpus = $MINION1_VM_NAME
+      v.name = ZZZMINION1_VM_NAME
+      v.memory = ZZZMINION1_VM_MEMORY
+      v.cpus = ZZZMINION1_VM_NAME
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--ioapic", "on"]
     end
 
     m.vm.provision :ansible do |ansible|
-      ansible.verbose = $ANSIBLE_VERBOSITY_LEVEL
+      ansible.verbose = ZZZANSIBLE_VERBOSITY_LEVEL
       ansible.compatibility_mode = "auto"
       ansible.playbook = "provisioning/build_minion.yml"
       ansible.inventory_path = "provisioning/inventory_minions"
@@ -91,23 +91,23 @@ Vagrant.configure("2") do |config|
   end
 
   # minion2 VM
-  config.vm.define $MINION2_VM_NAME do |m|
-    m.vm.define $MINION2_VM_NAME
-    m.vm.box = $VM_BOX
-    m.vm.hostname = $MINION2_VM_HOSTNAME
-    m.vm.network $VM_NETWORK_TYPE, ip: $MINION2_VM_IP
+  config.vm.define ZZZMINION2_VM_NAME do |m|
+    m.vm.define ZZZMINION2_VM_NAME
+    m.vm.box = ZZZVM_BOX
+    m.vm.hostname = ZZZMINION2_VM_HOSTNAME
+    m.vm.network ZZZVM_NETWORK_TYPE, ip: ZZZMINION2_VM_IP
     m.ssh.insert_key = false
 
     m.vm.provider :virtualbox do |v|
-      v.name = $MINION2_VM_NAME
-      v.memory = $MINION2_VM_MEMORY
-      v.cpus = $MINION2_VM_CPUS
+      v.name = ZZZMINION2_VM_NAME
+      v.memory = ZZZMINION2_VM_MEMORY
+      v.cpus = ZZZMINION2_VM_CPUS
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
       v.customize ["modifyvm", :id, "--ioapic", "on"]
     end
 
     m.vm.provision :ansible do |ansible|
-      ansible.verbose = $ANSIBLE_VERBOSITY_LEVEL
+      ansible.verbose = ZZZANSIBLE_VERBOSITY_LEVEL
       ansible.compatibility_mode = "auto"
       ansible.playbook = "provisioning/build_minion.yml"
       ansible.inventory_path = "provisioning/inventory_minions"
@@ -116,17 +116,17 @@ Vagrant.configure("2") do |config|
   end
 
   # tool VM
-  config.vm.define $TOOL_VM_NAME do |m|
-    m.vm.define $TOOL_VM_NAME
-    m.vm.box = $VM_BOX
-    m.vm.hostname = $TOOL_VM_HOSTNAME
-    m.vm.network $VM_NETWORK_TYPE, ip: $TOOL_VM_IP
+  config.vm.define ZZZTOOL_VM_NAME do |m|
+    m.vm.define ZZZTOOL_VM_NAME
+    m.vm.box = ZZZVM_BOX
+    m.vm.hostname = ZZZTOOL_VM_HOSTNAME
+    m.vm.network ZZZVM_NETWORK_TYPE, ip: ZZZTOOL_VM_IP
     m.ssh.insert_key = false
 
     m.vm.provider :virtualbox do |v|
-      v.name = $TOOL_VM_NAME
-      v.memory = $TOOL_VM_MEMORY
-      v.cpus = $TOOL_VM_CPUS
+      v.name = ZZZTOOL_VM_NAME
+      v.memory = ZZZTOOL_VM_MEMORY
+      v.cpus = ZZZTOOL_VM_CPUS
       v.gui = true
       v.customize ["modifyvm", :id, "--vram", "12"]
       v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
@@ -134,7 +134,7 @@ Vagrant.configure("2") do |config|
     end
 
     m.vm.provision :ansible do |ansible|
-      ansible.verbose = $ANSIBLE_VERBOSITY_LEVEL
+      ansible.verbose = ZZZANSIBLE_VERBOSITY_LEVEL
       ansible.compatibility_mode = "auto"
       ansible.playbook = "provisioning/build_tool.yml"
       ansible.inventory_path = "provisioning/inventory_tool"

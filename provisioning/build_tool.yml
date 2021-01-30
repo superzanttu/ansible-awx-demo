@@ -32,3 +32,8 @@
       ansible.builtin.service:
         name: "{{ xfce4_login_manager_service }}"
         state: restarted
+
+    - name: Restart VirtualBox Guest Addtions service
+      ansible.builtin.service:
+        name: vboxadd-service
+        state: restarted
