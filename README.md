@@ -1,6 +1,6 @@
 # Ansible AWX demo
 
-This example installs Ansible's [AWX Project](https://github.com/ansible/awx) (the upstream open source project behind [Ansible Tower (https://www.ansible.com/tower) on [Debian](http://www.debian.org) virtualmachine running in [VirtualBox](https://www.virtualbox.org/wiki/Downloads), so you can test and run AWX... to test and run more Ansible playbooks!
+This example installs Ansible's [AWX Project](https://github.com/ansible/awx) (the upstream open source project behind [Ansible Tower](https://www.ansible.com/tower) on [Debian](http://www.debian.org) virtualmachine running in [VirtualBox](https://www.virtualbox.org/wiki/Downloads), so you can test and run AWX... to test and run more Ansible playbooks!
 
 ## Getting Started
 
