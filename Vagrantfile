@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
 
     awx.vm.provision :ansible do |ansible|
       ansible.compatibility_mode = "auto"
-      ansible.playbook = "provisioning/build_awx_vm.yml"
+      ansible.playbook = "provisioning/build_vm_awx.yml"
       ansible.inventory_path = "provisioning/inventory_awx"
       ansible.become = true
     end
@@ -81,7 +81,7 @@ Vagrant.configure("2") do |config|
     m.vm.provision :ansible do |ansible|
       ansible.verbose = ANSIBLE_VERBOSITY_LEVEL
       ansible.compatibility_mode = "auto"
-      ansible.playbook = "provisioning/build_minion.yml"
+      ansible.playbook = "provisioning/build_vm_minions.yml"
       ansible.inventory_path = "provisioning/inventory_minions"
       ansible.become = true
     end
@@ -107,7 +107,7 @@ Vagrant.configure("2") do |config|
     m.vm.provision :ansible do |ansible|
       ansible.verbose = ANSIBLE_VERBOSITY_LEVEL
       ansible.compatibility_mode = "auto"
-      ansible.playbook = "provisioning/build_minion.yml"
+      ansible.playbook = "provisioning/build_vm_minions.yml"
       ansible.inventory_path = "provisioning/inventory_minions"
       ansible.become = true
     end
@@ -134,7 +134,7 @@ Vagrant.configure("2") do |config|
     m.vm.provision :ansible do |ansible|
       ansible.verbose = ANSIBLE_VERBOSITY_LEVEL
       ansible.compatibility_mode = "auto"
-      ansible.playbook = "provisioning/build_tool.yml"
+      ansible.playbook = "provisioning/build_vm_tool.yml"
       ansible.inventory_path = "provisioning/inventory_tool"
       ansible.become = true
     end

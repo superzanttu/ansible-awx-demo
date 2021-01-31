@@ -28,25 +28,40 @@
         dest: /etc/systemd/system/default.target
         state: link
 
-    #- name: Restart login manager service
-    #  ansible.builtin.service:
-    #    name: "{{ xfce4_login_manager_service }}"
-    #    state: restarted
-
-    #- name: Restart VirtualBox Guest Addtions service
-    #  ansible.builtin.service:
-    #    name: vboxadd-service
-    #    state: restarted
+    - name: Restart VirtualBox Guest Addtions service
+      ansible.builtin.service:
+        name: vboxadd-service
+        state: restarted
 
     - name: Setup autologin for user vagrant
       blockinfile:
-        path: /etc/lightdm.conf
+        path: /etc/lightdm/lightdm.conf
         insertafter: EOF
         marker: "# {mark} vagrant autologin"
         block: |
           [SeatDefaults]
-          autologin-user=Vagrant
+          autologin-user=vagrant
           autologin-user-timeout=0
 
-    - name: Final reboot
+    - name: Restart login manager service
+      ansible.builtin.service:
+        name: "{{ xfce4_login_manager_service }}"
+        state: restarted
+
+    - name: Check flagfile to prevent reboot
+      stat:
+        path: /tmp/bootattu
+      register: bootattu
+
+    - name: Reboot server only after first provisioning
       reboot:
+      when: bootattu.stat.exists == false
+
+    - name: Create flagfile to prevent future reboots
+      copy:
+        content: ""
+        dest: /tmp/bootattu
+        force: no
+        group: sys
+        owner: root
+        mode: 0555
