@@ -17,6 +17,16 @@
       when:
         - ansible_facts['distribution'] != "Debian"
 
+    - name: Update to /etc/hosts
+      blockinfile:
+        path: /etc/hosts
+        insertafter: EOF
+        marker: "# {mark} AWX demo servers"
+        block: |
+          192.168.6.65 awx.local awx
+          192.168.6.66 minion1.local minion1
+          192.168.6.67 minion2.local minion2
+
     - name: Install Xfce4 packages
       package:
         name: "{{ xfce4_packages }}"

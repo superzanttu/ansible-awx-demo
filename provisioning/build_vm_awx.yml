@@ -142,7 +142,7 @@
           name: awxkit
           state: present
 
-    - name: Add minions to /etc/host
+    - name: Update /etc/host
       blockinfile:
         path: /etc/hosts
         insertafter: EOF
@@ -150,3 +150,4 @@
         block: |
           192.168.6.66 minion1.local minion1
           192.168.6.67 minion2.local minion2
+          192.168.6.68 tool.local tool
