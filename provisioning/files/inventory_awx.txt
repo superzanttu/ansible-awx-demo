@@ -8,7 +8,7 @@ localhost ansible_connection=local ansible_python_interpreter="/usr/bin/env pyth
 # Otherwise the setup playbook will install the official Ansible images. Versions may
 # be selected based on: latest, 1, 1.0, 1.0.0, 1.0.0.123
 # by default the base will be used to search for ansible/awx
-dockerhub_base=ansible
+#dockerhub_base=ansible
 
 
 
@@ -19,9 +19,9 @@ awx_web_hostname=awxweb
 postgres_data_dir="~/.awx/pgdocker"
 host_port=80
 host_port_ssl=443
-#ssl_certificate=/root/aws.local.crt
+ssl_certificate=/root/aws.local.crt
 # Optional key file
-#ssl_certificate_key=/root/aws.local.pem
+ssl_certificate_key=/root/aws.local.pem
 docker_compose_dir="~/.awx/awxcompose"
 
 
