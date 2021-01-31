@@ -1,6 +1,6 @@
 # ansible-awx-demo
 
-ANSIBLE_VERBOSITY_LEVEL = ""
+ANSIBLE_VERBOSITY_LEVEL = "v"
 
 VM_BOX = "debian/buster64"
 VM_NETWORK_TYPE = "private_network"
@@ -48,6 +48,7 @@ Vagrant.configure("2") do |config|
     end
 
     awx.vm.provision :ansible do |ansible|
+      ansible.verbose = ANSIBLE_VERBOSITY_LEVEL
       ansible.compatibility_mode = "auto"
       ansible.playbook = "provisioning/build_vm_awx.yml"
       ansible.inventory_path = "provisioning/inventory_awx"

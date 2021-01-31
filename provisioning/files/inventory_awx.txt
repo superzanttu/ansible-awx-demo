@@ -19,9 +19,9 @@ awx_web_hostname=awxweb
 postgres_data_dir="~/.awx/pgdocker"
 host_port=80
 host_port_ssl=443
-ssl_certificate=/root/aws.local.crt
+#ssl_certificate=/root/aws.local.crt
 # Optional key file
-ssl_certificate_key=/root/aws.local.pem
+#ssl_certificate_key=/root/aws.local.pem
 docker_compose_dir="~/.awx/awxcompose"
 
 
