@@ -2,7 +2,7 @@
 
 commitmsg="Quick and dirty push"
 
-if [ $# -qt 1 ]; then
+if [ "$#" -qt 1 ]; then
   echo TEST1: $#
   commitmsg="kokokok"
 fi
