@@ -1,3 +1,4 @@
+#!/bin/bash
 #export TOWER_HOST=awx.local
 #export TOWER_USERNAME=admin
 #export TOWER_PASSWORD=password
