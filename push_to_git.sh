@@ -2,7 +2,7 @@
 
 commitmsg="Quick and dirty push"
 
-if [ $# -nq 0 ]; then
+if [ $# -gt 1 ]; then
   commitmsg="${*:2}"
 fi
 
