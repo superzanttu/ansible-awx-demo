@@ -1,18 +1,15 @@
 #!/bin/bash
+# Quickly powers off and snapshots all VMs
 
 VMS=("awx" "minion1" "minion2" "tool")
 
-#VBoxManage controlvm tool acpipowerbutton
-#VBoxManage controlvm awx acpipowerbutton
-#VBoxManage controlvm minion1 acpipowerbutton
-#VBoxManage controlvm minion2 acpipowerbutton
-
+# Shutdown all VMs
 for vm in ${VMS[*]}; do
-  echo ACPI poweroff for $vm
+  echo Ask Vagrant to shutdown $vm
   vagrant halt $vm
-  #VBoxManage controlvm $vm acpipowerbutton &
 done
 
+# Wait until all VMs are powered off
 for vm in ${VMS[*]}; do
   echo Waiting $vm to poweroff
   until $(VBoxManage showvminfo --machinereadable $vm | grep -q ^VMState=.poweroff.)
@@ -21,11 +18,13 @@ for vm in ${VMS[*]}; do
   done
 done
 
+# Take develeopment snapshot
 for vm in ${VMS[*]}; do
   echo Snapshot for $vm
-  VBoxManage snapshot $vm take temp_state
+  VBoxManage snapshot $vm take dev_state
 done
 
+# Start VMs
 for vm in ${VMS[*]}; do
   echo Starting $vm
   if [ $vm == "tool" ]; then
