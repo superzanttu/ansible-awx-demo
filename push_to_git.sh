@@ -6,7 +6,7 @@ if [ $# -nq 0 ]; then
   commitmsg="${*:2}"
 fi
 
-echo $#
+echo A: $#
 
 git add .
 git commit -m "$commitmsg"
