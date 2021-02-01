@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if [ $# -eq 0 ]; then
-  commitmsg="Quick and dirty push"
-else
-  commitmsg=$.
+commitmsg="Quick and dirty push"
+
+if [ $# -nq 0 ]; then
+  commitmsg="${*:2}"
 fi
 
 git add .
