@@ -23,9 +23,9 @@ To use the vagrant file, you will need to have done the following:
 
 ## List of VMs
 
-| VM name | Description        | IP address   | Username | Password | Note                            |
-| ------- | ------------------ | ------------ | -------- | -------- | ------------------------------- |
-| awx     | Ansible AWX server | 192.168.6.65 | vagrant  | vagrant  | Logins automatically as vagrant |
+| VM name | Description        | IP address   | Username | Password | Note                             |
+| ------- | ------------------ | ------------ | -------- | -------- | -------------------------------- |
+| awx     | Ansible AWX server | 192.168.6.65 | vagrant  | vagrant  | Logs in automatically as vagrant |
 | minion1 | Ansible target     | 192.168.6.66 | vagrant  | vagrant  | 
 | minion2 | Ansible target     | 192.168.6.67 | vagrant  | vagrant  |
 | tool    | Tool server        | 192.168.6.68 | vagrant  | vagrant  |
