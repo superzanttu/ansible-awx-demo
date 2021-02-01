@@ -1,6 +1,6 @@
 #!/bin/bash
 
-commitmsg="Quick and dirty push"
+commitmsg="Quick and dirty push!"
 
 if [ ! $# -eq 0 ]; then
   echo TEST1: $#
