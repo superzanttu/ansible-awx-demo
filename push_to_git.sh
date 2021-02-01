@@ -12,5 +12,3 @@ echo TEST2: $#
 git add .
 git commit -m "$commitmsg"
 git push
-
-eco s
