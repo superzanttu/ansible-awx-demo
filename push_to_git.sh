@@ -2,11 +2,11 @@
 
 commitmsg="Quick and dirty push"
 
-if [ $# -gt 1 ]; then
+if [ $# -qt 1 ]; then
   commitmsg="${*:2}"
 fi
 
-echo A: $#
+echo TEST: $#
 
 git add .
 git commit -m "$commitmsg"
