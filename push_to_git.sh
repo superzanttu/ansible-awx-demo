@@ -3,7 +3,7 @@
 commitmsg="Quick and dirty push"
 
 if [ $# -qt 1 ]; then
-  commitmsg="${*:2}"
+  commitmsg="kokokok"
 fi
 
 echo TEST: $#
