@@ -99,48 +99,73 @@
     - name: Clone AWX 17.0.1 repository
       git:
           repo: 'https://github.com/ansible/awx.git'
-          dest: /tmp/awx
+          dest: /opt/awx
           force: yes
           version: "17.0.1"
 
-    - name: Copy customized inventory file for AWX
-      ansible.builtin.copy:
-        src: inventory_awx.txt
-        dest: /tmp/awx/installer/inventory
-        owner: root
-        group: root
-        mode: '0754'
+    #- name: Copy customized inventory file for AWX
+    #  ansible.builtin.copy:
+    #    src: inventory_awx.txt
+    #    dest: /opt/awx/installer/inventory
+    #    owner: root
+    #    group: root
+    #    mode: '0754'
+
+    - name: Don't use DockeHub
+      ansible.builtin.lineinfile:
+        path: /opt/awx/installer/inventory
+        regexp: 'dockerhub_base=ansible'
+        line: '#dockerhub_base=ansible'
+
+    - name: Set path to SSL certificate
+      ansible.builtin.lineinfile:
+        path: /opt/awx/installer/inventory
+        regexp: '#ssl_certificate='
+        line: 'ssl_certificate=/opt/aws.local.crt'
+
+    - name: Set path to SSL certificate key
+      ansible.builtin.lineinfile:
+        path: /opt/awx/installer/inventory
+        regexp: '#ssl_certificate_key='
+        line: 'ssl_certificate_key=/opt/aws.local.pem'
+
+    - name: Set AWX admin password
+      ansible.builtin.lineinfile:
+        path: /opt/awx/installer/inventory
+        regexp: '# admin_password=password'
+        line: 'admin_password=password'
+
 
     - name: Generate the private key file to sign the CSR
       community.crypto.openssl_privatekey:
-        path: /root/awx.local.pem
+        path: /opt/awx.local.pem
         passphrase: "password"
         cipher: auto
 
     - name: Generate the CSR file signed with the private key
       community.crypto.openssl_csr:
-        path: /root/awx.local.csr
-        privatekey_path: /root/awx.local.pem
+        path: /opt/awx.local.csr
+        privatekey_path: /opt/awx.local.pem
         privatekey_passphrase: "password"
         common_name: awx.local
 
     - name: Sign the CSR file as a CA to turn it into a certificate
       community.crypto.x509_certificate:
-        path: /root/awx.local.crt
-        privatekey_path: /root/awx.local.pem
+        path: /opt/awx.local.crt
+        privatekey_path: /opt/awx.local.pem
         privatekey_passphrase: "password"
-        csr_path: /root/awx.local.csr
+        csr_path: /opt/awx.local.csr
         provider: selfsigned
 
-    - name: Run the AWX installation playbook.
-      command: "ansible-playbook -i inventory install.yml -e postgres_data_dir=/var/lib/pgdocker"
-      args:
-        chdir: "/tmp/awx/installer"
-
-    - name: Install AWX CLI
-      pip:
-          name: awxkit
-          state: present
+#    - name: Run the AWX installation playbook.
+#      command: "ansible-playbook -i inventory install.yml -e postgres_data_dir=/var/lib/pgdocker"
+#      args:
+#        chdir: "/opt/awx/installer"
+#
+#    - name: Install AWX CLI
+#      pip:
+#          name: awxkit
+#          state: present
 
     - name: Update /etc/host
       blockinfile:
